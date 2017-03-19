@@ -1,53 +1,66 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
+import Swiper from 'react-native-swiper';
+import randomcolor from 'randomcolor';
 
-export default class ProCalc extends Component {
+class TitleText extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Text style={{ fontSize: 48, color: 'black' }}>
+        {this.props.label}
+      </Text>
+    )
+  }
+}
+
+export default class ProCalc extends Component {
+
+  viewStyle() {
+    return {
+      flex: 1,
+      backgroundColor: randomcolor(),
+      justifyContent: 'center',
+      alignItems: 'center',
+    }
+  }
+  render() {
+    return (
+      <Swiper
+        loop={false}
+        showsPagination={false}
+        index={1}>
+        <View style={this.viewStyle()}>
+          <TitleText label="Left" />
+        </View>
+        <Swiper
+          horizontal={false}
+          loop={false}
+          showsPagination={false}
+          index={1}>
+          <View style={this.viewStyle()}>
+            <TitleText label="Top" />
+          </View>
+          <View style={this.viewStyle()}>
+            <TitleText label="Home" />
+          </View>
+          <View style={this.viewStyle()}>
+            <TitleText label="Bottom" />
+          </View>
+        </Swiper>        
+        <View style={this.viewStyle()}>
+          <TitleText label="Right" />
+        </View>
+      </Swiper>        
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('ProCalc', () => ProCalc);
